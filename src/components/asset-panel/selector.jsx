@@ -1,5 +1,6 @@
 const PropTypes = require('prop-types');
 const React = require('react');
+const {FormattedMessage} = require('react-intl');
 
 const SpriteSelectorItem = require('../../containers/sprite-selector-item.jsx');
 
@@ -8,22 +9,15 @@ const styles = require('./selector.css');
 
 const Selector = props => {
     const {
+        buttons,
         items,
-        newText,
         selectedItemIndex,
         onDeleteClick,
-        onItemClick,
-        onNewClick
+        onItemClick
     } = props;
 
     return (
         <Box className={styles.wrapper}>
-            <Box
-                className={styles.newItem}
-                onClick={onNewClick}
-            >
-                {newText}
-            </Box>
             <Box className={styles.listArea}>
                 {items.map((item, index) => (
                     <SpriteSelectorItem
@@ -39,19 +33,43 @@ const Selector = props => {
                     />
                 ))}
             </Box>
+            <Box className={styles.newButtons}>
+                {buttons.map(({message, img, onClick}, index) => (
+                    <Box
+                        className={styles.newButton}
+                        key={index}
+                        onClick={onClick}
+                    >
+                        <img
+                            className={styles.newButtonIcon}
+                            src={img}
+                        />
+                        <Box className={styles.newButtonLabel}>
+                            <FormattedMessage {...message} />
+                        </Box>
+                    </Box>
+                ))}
+            </Box>
         </Box>
     );
 };
 
 Selector.propTypes = {
+    buttons: PropTypes.arrayOf(PropTypes.shape({
+        message: PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            defaultMessage: PropTypes.string,
+            description: PropTypes.string
+        }),
+        img: PropTypes.string.isRequired,
+        onClick: PropTypes.func.isRequired
+    })),
     items: PropTypes.arrayOf(PropTypes.shape({
         url: PropTypes.string,
         name: PropTypes.string.isRequired
     })),
-    newText: PropTypes.string.isRequired,
     onDeleteClick: PropTypes.func.isRequired,
     onItemClick: PropTypes.func.isRequired,
-    onNewClick: PropTypes.func,
     selectedItemIndex: PropTypes.number.isRequired
 };
 

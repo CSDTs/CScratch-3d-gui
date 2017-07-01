@@ -1,7 +1,7 @@
-const PropTypes = require('prop-types');
 const React = require('react');
 const ReactDOM = require('react-dom');
 const {Provider} = require('react-redux');
+const {IntlProvider} = require('react-intl');
 const {createStore, applyMiddleware} = require('redux');
 const throttle = require('redux-throttle').default;
 
@@ -52,16 +52,11 @@ class App extends React.Component {
         if (this.state.projectData === null) return null;
         return (
             <GUI
-                basePath={this.props.basePath}
                 projectData={this.state.projectData}
             />
         );
     }
 }
-
-App.propTypes = {
-    basePath: PropTypes.string
-};
 
 const appTarget = document.createElement('div');
 appTarget.className = styles.app;
@@ -74,6 +69,8 @@ const store = applyMiddleware(
 );
 ReactDOM.render((
     <Provider store={store}>
-        <App basePath={process.env.BASE_PATH} />
+        <IntlProvider locale="en">
+            <App />
+        </IntlProvider>
     </Provider>
 ), appTarget);
