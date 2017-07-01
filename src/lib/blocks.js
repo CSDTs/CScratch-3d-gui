@@ -1,4 +1,4 @@
-const ScratchBlocks = require('scratch-blocks');
+const ScratchBlocks = require('cscratch-3d-blocks');
 
 module.exports = function (vm) {
 
@@ -79,7 +79,7 @@ module.exports = function (vm) {
         const json = jsonForMenuBlock('BACKDROP', backdropsMenu, looksColors, []);
         this.jsonInit(json);
     };
-
+/*
     ScratchBlocks.Blocks.motion_pointtowards_menu.init = function () {
         const json = jsonForMenuBlock('TOWARDS', spriteMenu, motionColors, [
             ['mouse-pointer', '_mouse_']
@@ -94,7 +94,7 @@ module.exports = function (vm) {
         ]);
         this.jsonInit(json);
     };
-
+*/
     ScratchBlocks.Blocks.sensing_of_object_menu.init = function () {
         const json = jsonForMenuBlock('OBJECT', spriteMenu, sensingColors, [
             ['Stage', '_stage_']
