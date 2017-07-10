@@ -17,7 +17,7 @@
   "homepage": "https://github.com/LLK/scratch-gui#readme",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/LLK/scratch-gui.git"
+    "url": "git+ssh://git@github.com/CSnap/CScratch-3d-gui.git"
   },
   "peerDependencies": {
     "react": "^15",
@@ -68,7 +68,7 @@
     "scratch-blocks": "latest",
     "scratch-render": "CSnap/CScratch-3d-render",
     "scratch-storage": "^0.2.0",
-    "scratch-vm": "CSnap/CScratch-3d-vm",
+    "scratch-vm": "CSnap/CScratch-3d-vm#develop",
     "style-loader": "^0.18.0",
     "svg-to-image": "1.1.3",
     "svg-url-loader": "2.0.2",
