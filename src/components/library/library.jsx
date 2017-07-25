@@ -58,7 +58,7 @@ class LibraryComponent extends React.Component {
                     {this.getFilteredData().map((dataItem, index) => {
                         const scratchURL = dataItem.md5 ?
                             `https://cdn.assets.scratch.mit.edu/internalapi/asset/${dataItem.md5}/get/` :
-                            dataItem.rawURL;
+                            (dataItem.rawURL || '/static/blocks-media/icons/set-led_mystery.svg');
                         return (
                             <LibraryItem
                                 iconURL={scratchURL}

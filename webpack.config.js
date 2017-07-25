@@ -89,7 +89,7 @@ module.exports = {
             from: 'node_modules/scratch-blocks/media',
             to: 'static/blocks-media'
         }, {
-            from: 'assets',
+            from: 'node_modules/scratch-render/dist/assets',
             to: 'static/costumes'
         }])
     ].concat(process.env.NODE_ENV === 'production' ? [

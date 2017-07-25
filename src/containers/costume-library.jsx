@@ -3,7 +3,7 @@ const PropTypes = require('prop-types');
 const React = require('react');
 const VM = require('scratch-vm');
 
-const costumeLibraryContent = require('../lib/libraries/costumes.json');
+const costumeLibraryContent = require('../lib/libraries/costumes3D.json');
 const LibraryComponent = require('../components/library/library.jsx');
 
 
@@ -17,12 +17,12 @@ class CostumeLibrary extends React.PureComponent {
     handleItemSelected (item) {
         const vmCostume = {
             name: item.name,
-            rotationCenterX: item.info[0],
-            rotationCenterY: item.info[1],
-            bitmapResolution: item.info.length > 2 ? item.info[2] : 1,
+            rotationCenterX: item.info ? item.info[0] : 0,
+            rotationCenterY: item.info ? item.info[1] : 0,
+            bitmapResolution: item.info && item.info.length > 2 ? item.info[2] : 1,
             skinId: null
         };
-        this.props.vm.addCostume(item.md5, vmCostume);
+        this.props.vm.addCostume(item.name + ".json", vmCostume);
     }
     render () {
         return (
