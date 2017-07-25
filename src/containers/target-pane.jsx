@@ -1,18 +1,18 @@
-const bindAll = require('lodash.bindall');
-const React = require('react');
+import bindAll from 'lodash.bindall';
+import React from 'react';
 
-const {connect} = require('react-redux');
+import {connect} from 'react-redux';
 
-const {
+import {
     openBackdropLibrary,
     openSpriteLibrary,
     closeBackdropLibrary,
     closeCostumeLibrary,
     closeSoundLibrary,
     closeSpriteLibrary
-} = require('../reducers/modals');
+} from '../reducers/modals';
 
-const TargetPaneComponent = require('../components/target-pane/target-pane.jsx');
+import TargetPaneComponent from '../components/target-pane/target-pane.jsx';
 
 class TargetPane extends React.Component {
     constructor (props) {
@@ -117,7 +117,7 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
-module.exports = connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(TargetPane);

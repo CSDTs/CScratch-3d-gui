@@ -1,10 +1,10 @@
-const bindAll = require('lodash.bindall');
-const PropTypes = require('prop-types');
-const React = require('react');
+import bindAll from 'lodash.bindall';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const {connect} = require('react-redux');
+import {connect} from 'react-redux';
 
-const StageSelectorComponent = require('../components/stage-selector/stage-selector.jsx');
+import StageSelectorComponent from '../components/stage-selector/stage-selector.jsx';
 
 class StageSelector extends React.Component {
     constructor (props) {
@@ -44,7 +44,7 @@ const mapStateToProps = (state, {assetId}) => ({
     url: assetId && state.vm.runtime.storage.get(assetId).encodeDataURI()
 });
 
-module.exports = connect(
+export default connect(
     mapStateToProps,
     () => ({}) // omit dispatch prop
 )(StageSelector);

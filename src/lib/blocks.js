@@ -1,6 +1,6 @@
-const ScratchBlocks = require('cscratch-3d-blocks');
+import ScratchBlocks from 'cscratch-3d-blocks';
 
-module.exports = function (vm) {
+export default function (vm) {
 
     const jsonForMenuBlock = function (name, menuOptionsFn, colors, start) {
         return {
@@ -137,4 +137,4 @@ module.exports = function (vm) {
     };
 
     return ScratchBlocks;
-};
+}

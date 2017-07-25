@@ -1,15 +1,20 @@
-const classNames = require('classnames');
-const PropTypes = require('prop-types');
-const React = require('react');
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const Box = require('../box/box.jsx');
-const styles = require('./sprite-info.css');
+import Box from '../box/box.jsx';
+import Label from '../forms/label.jsx';
+import Input from '../forms/input.jsx';
+import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
 
-const xIcon = require('./icon--x.svg');
-const yIcon = require('./icon--y.svg');
-const showIcon = require('./icon--show.svg');
-const hideIcon = require('./icon--hide.svg');
+import styles from './sprite-info.css';
 
+import xIcon from './icon--x.svg';
+import yIcon from './icon--y.svg';
+import showIcon from './icon--show.svg';
+import hideIcon from './icon--hide.svg';
+
+const BufferedInput = BufferedInputHOC(Input);
 const ROTATION_STYLES = ['left-right', 'don\'t rotate', 'all around'];
 
 class SpriteInfo extends React.Component {
@@ -31,18 +36,16 @@ class SpriteInfo extends React.Component {
             >
                 <div className={classNames(styles.row, styles.rowPrimary)}>
                     <div className={styles.group}>
-                        <span className={styles.inputLabel}>Sprite</span>
-                        <input
-                            className={classNames(styles.inputForm, styles.spriteName)}
-                            disabled={this.props.disabled}
-                            placeholder="Name"
-                            tabIndex="1"
-                            type="text"
-                            value={this.props.disabled ? '' : this.props.name}
-                            onBlur={this.props.onBlurName}
-                            onChange={this.props.onChangeName}
-                            onKeyPress={this.props.onKeyPress}
-                        />
+                        <Label text="Sprite">
+                            <BufferedInput
+                                disabled={this.props.disabled}
+                                placeholder="Name"
+                                tabIndex="1"
+                                type="text"
+                                value={this.props.disabled ? '' : this.props.name}
+                                onSubmit={this.props.onChangeName}
+                            />
+                        </Label>
                     </div>
 
                     <div className={styles.group}>
@@ -52,18 +55,17 @@ class SpriteInfo extends React.Component {
                                 src={xIcon}
                             />
                         </div>
-                        <span className={styles.inputLabel}>x</span>
-                        <input
-                            className={classNames(styles.inputForm, styles.x)}
-                            disabled={this.props.disabled}
-                            placeholder="x"
-                            tabIndex="2"
-                            type="text"
-                            value={this.props.disabled ? '' : this.props.x}
-                            onBlur={this.props.onBlurX}
-                            onChange={this.props.onChangeX}
-                            onKeyPress={this.props.onKeyPress}
-                        />
+                        <Label text="x">
+                            <BufferedInput
+                                small
+                                disabled={this.props.disabled}
+                                placeholder="x"
+                                tabIndex="2"
+                                type="text"
+                                value={this.props.disabled ? '' : this.props.x}
+                                onSubmit={this.props.onChangeX}
+                            />
+                        </Label>
                     </div>
 
                     <div className={styles.group}>
@@ -73,97 +75,103 @@ class SpriteInfo extends React.Component {
                                 src={yIcon}
                             />
                         </div>
-                        <span className={styles.inputLabel}>y</span>
-                        <input
-                            className={classNames(styles.inputForm, styles.y)}
-                            disabled={this.props.disabled}
-                            placeholder="y"
-                            tabIndex="3"
-                            type="text"
-                            value={this.props.disabled ? '' : this.props.y}
-                            onBlur={this.props.onBlurY}
-                            onChange={this.props.onChangeY}
-                            onKeyPress={this.props.onKeyPress}
-                        />
+                        <Label text="y">
+                            <BufferedInput
+                                small
+                                disabled={this.props.disabled}
+                                placeholder="y"
+                                tabIndex="3"
+                                type="text"
+                                value={this.props.disabled ? '' : this.props.y}
+                                onSubmit={this.props.onChangeY}
+                            />
+                        </Label>
                     </div>
                 </div>
 
                 <div className={classNames(styles.row, styles.rowSecondary)}>
                     <div className={styles.group}>
-                        <span className={styles.inputLabelSecondary}>
-                            Show
-                        </span>
-                        <div>
-                            <div
-                                className={classNames(
-                                    styles.radio,
-                                    styles.radioLeft,
-                                    styles.iconWrapper,
-                                    {
-                                        [styles.isActive]: this.props.visible && !this.props.disabled,
-                                        [styles.isDisabled]: this.props.disabled
-                                    }
-                                )}
-                                tabIndex="4"
-                                onClick={this.props.onClickVisible}
-                            >
-                                <img
-                                    className={styles.icon}
-                                    src={showIcon}
-                                />
-                            </div>
-                            <div
-                                className={classNames(
-                                    styles.radio,
-                                    styles.radioRight,
-                                    styles.iconWrapper,
-                                    {
-                                        [styles.isActive]: !this.props.visible && !this.props.disabled,
-                                        [styles.isDisabled]: this.props.disabled
-                                    }
-                                )}
-                                tabIndex="4"
-                                onClick={this.props.onClickNotVisible}
-                            >
-                                <img
-                                    className={styles.icon}
-                                    src={hideIcon}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div className={styles.group}>
-                        <span className={styles.inputLabelSecondary}>Direction</span>
-                        <input
-                            className={classNames(styles.inputForm, styles.direction)}
-                            disabled={this.props.disabled}
-                            tabIndex="5"
-                            type="text"
-                            value={this.props.disabled ? '' : this.props.direction}
-                            onBlur={this.props.onBlurDirection}
-                            onChange={this.props.onChangeDirection}
-                            onKeyPress={this.props.onKeyPress}
-                        />
-                    </div>
-                    <div className={styles.group}>
-                        <span className={styles.inputLabelSecondary}>
-                            Rotation
-                        </span>
-                        <select
-                            className={classNames(styles.selectForm, styles.rotationSelect)}
-                            disabled={this.props.disabled}
-                            value={this.props.rotationStyle}
-                            onChange={this.props.onChangeRotationStyle}
+                        <Label
+                            secondary
+                            text="Show"
                         >
-                            {ROTATION_STYLES.map(style => (
-                                <option
-                                    key={style}
-                                    value={style}
+                            <div>
+                                <div
+                                    className={classNames(
+                                        styles.radio,
+                                        styles.radioLeft,
+                                        styles.iconWrapper,
+                                        {
+                                            [styles.isActive]: this.props.visible && !this.props.disabled,
+                                            [styles.isDisabled]: this.props.disabled
+                                        }
+                                    )}
+                                    tabIndex="4"
+                                    onClick={this.props.onClickVisible}
                                 >
-                                    {style}
-                                </option>
-                            ))}
-                        </select>
+                                    <img
+                                        className={styles.icon}
+                                        src={showIcon}
+                                    />
+                                </div>
+                                <div
+                                    className={classNames(
+                                        styles.radio,
+                                        styles.radioRight,
+                                        styles.iconWrapper,
+                                        {
+                                            [styles.isActive]: !this.props.visible && !this.props.disabled,
+                                            [styles.isDisabled]: this.props.disabled
+                                        }
+                                    )}
+                                    tabIndex="4"
+                                    onClick={this.props.onClickNotVisible}
+                                >
+                                    <img
+                                        className={styles.icon}
+                                        src={hideIcon}
+                                    />
+                                </div>
+                            </div>
+                        </Label>
+                    </div>
+                    <div className={styles.group}>
+                        <Label
+                            secondary
+                            text="Direction"
+                        >
+                            <BufferedInput
+                                small
+                                disabled={this.props.disabled}
+                                label="Direction"
+                                tabIndex="5"
+                                type="text"
+                                value={this.props.disabled ? '' : this.props.direction}
+                                onSubmit={this.props.onChangeDirection}
+                            />
+                        </Label>
+                    </div>
+                    <div className={styles.group}>
+                        <Label
+                            secondary
+                            text="Rotation"
+                        >
+                            <select
+                                className={classNames(styles.selectForm, styles.rotationSelect)}
+                                disabled={this.props.disabled}
+                                value={this.props.rotationStyle}
+                                onChange={this.props.onChangeRotationStyle}
+                            >
+                                {ROTATION_STYLES.map(style => (
+                                    <option
+                                        key={style}
+                                        value={style}
+                                    >
+                                        {style}
+                                    </option>
+                                ))}
+                            </select>
+                        </Label>
                     </div>
                 </div>
             </Box>
@@ -178,10 +186,6 @@ SpriteInfo.propTypes = {
     ]),
     disabled: PropTypes.bool,
     name: PropTypes.string,
-    onBlurDirection: PropTypes.func,
-    onBlurName: PropTypes.func,
-    onBlurX: PropTypes.func,
-    onBlurY: PropTypes.func,
     onChangeDirection: PropTypes.func,
     onChangeName: PropTypes.func,
     onChangeRotationStyle: PropTypes.func,
@@ -189,7 +193,6 @@ SpriteInfo.propTypes = {
     onChangeY: PropTypes.func,
     onClickNotVisible: PropTypes.func,
     onClickVisible: PropTypes.func,
-    onKeyPress: PropTypes.func,
     rotationStyle: PropTypes.oneOf(ROTATION_STYLES),
     visible: PropTypes.bool,
     x: PropTypes.oneOfType([
@@ -202,4 +205,4 @@ SpriteInfo.propTypes = {
     ])
 };
 
-module.exports = SpriteInfo;
+export default SpriteInfo;

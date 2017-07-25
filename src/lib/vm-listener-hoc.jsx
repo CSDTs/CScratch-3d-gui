@@ -1,12 +1,12 @@
-const bindAll = require('lodash.bindall');
-const PropTypes = require('prop-types');
-const React = require('react');
-const VM = require('scratch-vm');
+import bindAll from 'lodash.bindall';
+import PropTypes from 'prop-types';
+import React from 'react';
+import VM from 'scratch-vm';
 
-const {connect} = require('react-redux');
+import {connect} from 'react-redux';
 
-const targets = require('../reducers/targets');
-const monitors = require('../reducers/monitors');
+import {updateEditingTarget, updateTargets} from '../reducers/targets';
+import {updateMonitors} from '../reducers/monitors';
 
 /*
  * Higher Order Component to manage events emitted by the VM
@@ -100,11 +100,11 @@ const vmListenerHOC = function (WrappedComponent) {
     });
     const mapDispatchToProps = dispatch => ({
         onTargetsUpdate: data => {
-            dispatch(targets.updateEditingTarget(data.editingTarget));
-            dispatch(targets.updateTargets(data.targetList));
+            dispatch(updateEditingTarget(data.editingTarget));
+            dispatch(updateTargets(data.targetList));
         },
         onMonitorsUpdate: monitorList => {
-            dispatch(monitors.updateMonitors(monitorList));
+            dispatch(updateMonitors(monitorList));
         }
     });
     return connect(
@@ -113,4 +113,4 @@ const vmListenerHOC = function (WrappedComponent) {
     )(VMListener);
 };
 
-module.exports = vmListenerHOC;
+export default vmListenerHOC;

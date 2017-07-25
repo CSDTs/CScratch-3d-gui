@@ -1,10 +1,10 @@
-const bindAll = require('lodash.bindall');
-const PropTypes = require('prop-types');
-const React = require('react');
+import bindAll from 'lodash.bindall';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const {connect} = require('react-redux');
+import {connect} from 'react-redux';
 
-const SpriteSelectorItemComponent = require('../components/sprite-selector-item/sprite-selector-item.jsx');
+import SpriteSelectorItemComponent from '../components/sprite-selector-item/sprite-selector-item.jsx';
 
 class SpriteSelectorItem extends React.Component {
     constructor (props) {
@@ -58,6 +58,6 @@ const mapStateToProps = (state, {assetId, costumeURL}) => ({
     costumeURL: costumeURL || (assetId && state.vm.runtime.storage.get(assetId).encodeDataURI())
 });
 
-module.exports = connect(
+export default connect(
     mapStateToProps
 )(SpriteSelectorItem);

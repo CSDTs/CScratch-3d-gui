@@ -1,5 +1,5 @@
 const UPDATE_MONITORS = 'scratch-gui/monitors/UPDATE_MONITORS';
-const {OrderedMap} = require('immutable');
+import {OrderedMap} from 'immutable';
 
 const initialState = OrderedMap();
 
@@ -13,7 +13,7 @@ const reducer = function (state, action) {
     }
 };
 
-reducer.updateMonitors = function (monitors) {
+const updateMonitors = function (monitors) {
     return {
         type: UPDATE_MONITORS,
         monitors: monitors,
@@ -23,4 +23,7 @@ reducer.updateMonitors = function (monitors) {
     };
 };
 
-module.exports = reducer;
+export {
+    reducer as default,
+    updateMonitors
+};

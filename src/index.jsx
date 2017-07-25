@@ -1,16 +1,16 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
-const {Provider} = require('react-redux');
-const {IntlProvider} = require('react-intl');
-const {createStore, applyMiddleware} = require('redux');
-const throttle = require('redux-throttle').default;
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware, compose} from 'redux';
+import throttle from 'redux-throttle';
+import {intlInitialState, IntlProvider} from './reducers/intl.js';
 
-const GUI = require('./containers/gui.jsx');
-const log = require('./lib/log');
-const ProjectLoader = require('./lib/project-loader');
-const reducer = require('./reducers/gui');
+import GUI from './containers/gui.jsx';
+import log from './lib/log';
+import ProjectLoader from './lib/project-loader';
+import reducer from './reducers/gui';
 
-const styles = require('./index.css');
+import styles from './index.css';
 
 class App extends React.Component {
     constructor (props) {
@@ -61,15 +61,18 @@ class App extends React.Component {
 const appTarget = document.createElement('div');
 appTarget.className = styles.app;
 document.body.appendChild(appTarget);
-const store = applyMiddleware(
-    throttle(300, {leading: true, trailing: true})
-)(createStore)(
-    reducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const enhancer = composeEnhancers(
+    applyMiddleware(
+        throttle(300, {leading: true, trailing: true})
+    )
 );
+const store = createStore(reducer, intlInitialState, enhancer);
+
 ReactDOM.render((
     <Provider store={store}>
-        <IntlProvider locale="en">
+        <IntlProvider>
             <App />
         </IntlProvider>
     </Provider>

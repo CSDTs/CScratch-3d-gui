@@ -1,10 +1,10 @@
-const bindAll = require('lodash.bindall');
-const PropTypes = require('prop-types');
-const React = require('react');
-const VM = require('scratch-vm');
+import bindAll from 'lodash.bindall';
+import PropTypes from 'prop-types';
+import React from 'react';
+import VM from 'scratch-vm';
 
-const costumeLibraryContent = require('../lib/libraries/costumes3D.json');
-const LibraryComponent = require('../components/library/library.jsx');
+import costumeLibraryContent from '../lib/libraries/costumes3D.json';
+import LibraryComponent from '../components/library/library.jsx';
 
 
 class CostumeLibrary extends React.PureComponent {
@@ -43,4 +43,4 @@ CostumeLibrary.propTypes = {
     vm: PropTypes.instanceOf(VM).isRequired
 };
 
-module.exports = CostumeLibrary;
+export default CostumeLibrary;

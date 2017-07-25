@@ -1,7 +1,7 @@
-const PropTypes = require('prop-types');
-const React = require('react');
-const bindAll = require('lodash.bindall');
-const PromptComponent = require('../components/prompt/prompt.jsx');
+import PropTypes from 'prop-types';
+import React from 'react';
+import bindAll from 'lodash.bindall';
+import PromptComponent from '../components/prompt/prompt.jsx';
 
 class Prompt extends React.Component {
     constructor (props) {
@@ -51,4 +51,4 @@ Prompt.propTypes = {
     title: PropTypes.string.isRequired
 };
 
-module.exports = Prompt;
+export default Prompt;
