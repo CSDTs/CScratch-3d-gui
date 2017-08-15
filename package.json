@@ -79,7 +79,7 @@
     "rimraf": "^2.6.1",
     "scratch-audio": "latest",
     "scratch-blocks": "latest",
-    "scratch-render": "CSnap/CScratch-3d-render",
+    "scratch-render": "CSnap/CScratch-3d-render#develop",
     "scratch-storage": "^0.2.0",
     "scratch-vm": "CSnap/CScratch-3d-vm#develop",
     "style-loader": "^0.18.0",
